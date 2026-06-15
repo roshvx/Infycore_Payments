@@ -1,29 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkUser = () => {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      } else {
-        setUser(null);
-      }
-    };
-
-    checkUser();
-
-    // Listen to authentication changes
-    window.addEventListener('authChange', checkUser);
-    return () => {
-      window.removeEventListener('authChange', checkUser);
-    };
-  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -31,13 +10,6 @@ const Navbar = () => {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setUser(null);
-    closeMobileMenu();
-    navigate('/');
   };
 
   return (
@@ -75,24 +47,10 @@ const Navbar = () => {
           </nav>
 
           {/* Nav CTA */}
-          <div className="nav-cta" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            {user ? (
-              <>
-                <span className="nav-item" style={{ textTransform: 'none', cursor: 'default' }}>Hi, {user.name}</span>
-                <button onClick={handleLogout} className="btn btn-secondary" style={{ padding: '8px 16px' }}>
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <NavLink to="/login" className="btn btn-secondary" style={{ padding: '8px 16px' }}>
-                  Sign In
-                </NavLink>
-                <NavLink to="/contact" className="btn btn-primary">
-                  <i className="fas fa-rocket mr-1"></i> Apply Now
-                </NavLink>
-              </>
-            )}
+          <div className="nav-cta">
+            <NavLink to="/contact" className="btn btn-primary">
+              <i className="fas fa-rocket mr-1"></i> Apply Now
+            </NavLink>
           </div>
 
           {/* Hamburger Menu Icon */}
@@ -117,23 +75,9 @@ const Navbar = () => {
           <NavLink to="/contact" className={({ isActive }) => isActive ? "mobile-nav-item active" : "mobile-nav-item"} onClick={closeMobileMenu}>
             Contact
           </NavLink>
-          {user ? (
-            <>
-              <span className="mobile-nav-item" style={{ textTransform: 'none', marginTop: '20px' }}>Hi, {user.name}</span>
-              <button onClick={handleLogout} className="btn btn-secondary" style={{ marginTop: '10px' }}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <NavLink to="/login" className="btn btn-secondary" style={{ marginTop: '20px' }} onClick={closeMobileMenu}>
-                Sign In
-              </NavLink>
-              <NavLink to="/contact" className="btn btn-primary" style={{ marginTop: '10px' }} onClick={closeMobileMenu}>
-                <i className="fas fa-rocket mr-1"></i> Apply Now
-              </NavLink>
-            </>
-          )}
+          <NavLink to="/contact" className="btn btn-primary" style={{ marginTop: '20px' }} onClick={closeMobileMenu}>
+            <i className="fas fa-rocket mr-1"></i> Apply Now
+          </NavLink>
         </div>
       </div>
     </>

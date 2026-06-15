@@ -19,7 +19,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const { name, email, subject, message } = formData;
     if (!name || !email || !subject || !message) {
       setStatus('error');
