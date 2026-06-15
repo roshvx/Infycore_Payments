@@ -62,10 +62,9 @@ const Contact = () => {
       }
     } catch (err) {
       console.error('API Contact submission error:', err);
-      // Fallback message for front-end demonstration if backend server is not running
-      setStatus('success');
-      setStatusMessage('Message captured! (Local Simulation: Backend is offline, but frontend validated successfully).');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      // Show error message when backend call fails
+      setStatus('error');
+      setStatusMessage('Failed to send message. Please try again later.');
     }
   };
 
