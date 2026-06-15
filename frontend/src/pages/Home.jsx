@@ -5,17 +5,17 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="container hero-grid">
-          <div className="hero-content">
+      <section className="hero-section" style={{ padding: '120px 0 100px 0' }}>
+        <div className="container">
+          <div className="hero-content" style={{ textAlign: 'center', margin: '0 auto', maxWidth: '800px' }}>
             <span className="hero-badge">RBI Licensed Payment Aggregator</span>
             <h1 className="hero-title italic-black">
               Payments That <br /> Power Your Growth
             </h1>
-            <p className="hero-description">
+            <p className="hero-description" style={{ margin: '0 auto 36px auto' }}>
               Accept 100+ payment modes with 99.6% success rate. Smart dashboard & instant settlements for Indian businesses.
             </p>
-            <div className="hero-ctas">
+            <div className="hero-ctas" style={{ justifyContent: 'center' }}>
               <Link to="/products" className="btn btn-primary">
                 Start Accepting
               </Link>
@@ -23,13 +23,6 @@ const Home = () => {
                 Talk to Expert
               </Link>
             </div>
-          </div>
-          <div className="hero-image-wrapper">
-            <img 
-              src="https://images.unsplash.com/photo-1563013544-824ae1d704d3?auto=format&fit=crop&w=800&q=80" 
-              alt="Secured Payment Gateway Interface" 
-              className="hero-img" 
-            />
           </div>
         </div>
       </section>

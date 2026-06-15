@@ -46,10 +46,10 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-          ? 'http://localhost:5000/api/projects' 
+        const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+          ? 'http://localhost:5000/api/projects'
           : '/api/projects';
-          
+
         const response = await fetch(apiBase);
         if (response.ok) {
           const data = await response.json();
