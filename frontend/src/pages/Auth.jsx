@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
+
+  useEffect(() => {
+    document.title = isLogin ? "Sign In | Infycore Merchant Dashboard" : "Sign Up | Join Infycore Payments Network";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", isLogin 
+        ? "Log in to your secure Infycore Payments merchant portal to monitor transaction volumes, settlements, and payouts." 
+        : "Register your business online with Infycore Payments to access modern UPI, card processing, and BBPS interfaces.");
+    }
+  }, [isLogin]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -105,117 +115,119 @@ const Auth = () => {
   };
 
   return (
-    <section className="section-padding container" style={{ display: 'flex', justifyContent: 'center', minHeight: 'calc(100vh - 200px)', alignItems: 'center' }}>
-      <div className="contact-form-box" style={{ maxWidth: '480px', width: '100%', padding: '40px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <h2 className="italic-black" style={{ color: 'var(--color-navy-dark)', fontSize: '28px', marginBottom: '8px' }}>
-            {isLogin ? 'Sign In' : 'Create Account'}
-          </h2>
-          <p style={{ color: 'var(--color-text-gray)', fontSize: '14px' }}>
-            {isLogin ? 'Access your merchant dashboard' : 'Join Infycore Payments network'}
-          </p>
-        </div>
-
-        {status === 'success' && (
-          <div className="submit-alert alert-success" style={{ marginBottom: '20px' }}>
-            <i className="fas fa-circle-check mr-2"></i> {statusMessage}
+    <div className="auth-page-wrapper">
+      <section className="section-padding container" style={{ display: 'flex', justifyContent: 'center', minHeight: 'calc(100vh - 200px)', alignItems: 'center' }}>
+        <div className="contact-form-box animate-fade-in-up" style={{ maxWidth: '480px', width: '100%', padding: '40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+            <h2 className="italic-black" style={{ color: 'var(--color-navy-dark)', fontSize: '28px', marginBottom: '8px' }}>
+              {isLogin ? 'Sign In' : 'Create Account'}
+            </h2>
+            <p style={{ color: 'var(--color-text-gray)', fontSize: '14px' }}>
+              {isLogin ? 'Access your merchant dashboard' : 'Join Infycore Payments network'}
+            </p>
           </div>
-        )}
-        {status === 'error' && (
-          <div className="submit-alert alert-error" style={{ marginBottom: '20px' }}>
-            <i className="fas fa-triangle-exclamation mr-2"></i> {statusMessage}
-          </div>
-        )}
 
-        <form onSubmit={handleSubmit}>
-          {!isLogin && (
+          {status === 'success' && (
+            <div className="submit-alert alert-success" style={{ marginBottom: '20px' }}>
+              <i className="fas fa-circle-check mr-2"></i> {statusMessage}
+            </div>
+          )}
+          {status === 'error' && (
+            <div className="submit-alert alert-error" style={{ marginBottom: '20px' }}>
+              <i className="fas fa-triangle-exclamation mr-2"></i> {statusMessage}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            {!isLogin && (
+              <div className="form-group">
+                <label className="form-label" htmlFor="name">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="form-control"
+                  placeholder="Enter full name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            )}
+
             <div className="form-group">
-              <label className="form-label" htmlFor="name">Full Name</label>
+              <label className="form-label" htmlFor="email">Email Address</label>
               <input
-                type="text"
-                id="name"
-                name="name"
+                type="email"
+                id="email"
+                name="email"
                 className="form-control"
-                placeholder="Enter full name"
-                value={formData.name}
+                placeholder="name@company.com"
+                value={formData.email}
                 onChange={handleChange}
                 required
               />
             </div>
-          )}
 
-          <div className="form-group">
-            <label className="form-label" htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="form-control"
-              placeholder="name@company.com"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label" htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="form-control"
-              placeholder="••••••••"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {!isLogin && (
             <div className="form-group">
-              <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
+              <label className="form-label" htmlFor="password">Password</label>
               <input
                 type="password"
-                id="confirmPassword"
-                name="confirmPassword"
+                id="password"
+                name="password"
                 className="form-control"
                 placeholder="••••••••"
-                value={formData.confirmPassword}
+                value={formData.password}
                 onChange={handleChange}
                 required
               />
             </div>
-          )}
 
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{ width: '100%', padding: '14px', borderRadius: '12px', marginTop: '10px' }}
-            disabled={status === 'loading'}
-          >
-            {status === 'loading' ? (
-              <>
-                <i className="fas fa-spinner fa-spin mr-1"></i> Processing...
-              </>
-            ) : (
-              isLogin ? 'Sign In' : 'Sign Up'
+            {!isLogin && (
+              <div className="form-group">
+                <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  className="form-control"
+                  placeholder="••••••••"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             )}
-          </button>
-        </form>
 
-        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '13px', color: 'var(--color-text-gray)' }}>
-          {isLogin ? "Don't have a merchant account? " : "Already have an account? "}
-          <button
-            type="button"
-            onClick={handleToggle}
-            style={{ background: 'none', border: 'none', color: 'var(--color-orange)', fontWeight: '700', cursor: 'pointer', padding: '0', textDecoration: 'underline' }}
-          >
-            {isLogin ? 'Sign Up' : 'Sign In'}
-          </button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ width: '100%', padding: '14px', borderRadius: '12px', marginTop: '10px' }}
+              disabled={status === 'loading'}
+            >
+              {status === 'loading' ? (
+                <>
+                  <i className="fas fa-spinner fa-spin mr-1"></i> Processing...
+                </>
+              ) : (
+                isLogin ? 'Sign In' : 'Sign Up'
+              )}
+            </button>
+          </form>
+
+          <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '13px', color: 'var(--color-text-gray)' }}>
+            {isLogin ? "Don't have a merchant account? " : "Already have an account? "}
+            <button
+              type="button"
+              onClick={handleToggle}
+              style={{ background: 'none', border: 'none', color: 'var(--color-orange)', fontWeight: '700', cursor: 'pointer', padding: '0', textDecoration: 'underline' }}
+            >
+              {isLogin ? 'Sign Up' : 'Sign In'}
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

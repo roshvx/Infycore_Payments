@@ -33,6 +33,14 @@ const FALLBACK_PRODUCTS = [
     tags: ['SMS Pay', 'Web Checkout', 'Billing Links'],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
     demoUrl: '#'
+  },
+  {
+    title: 'BBPS Services (Bharat Bill Pay)',
+    description: 'Provide secure utility bill payments, mobile and DTH recharges, insurance premium collections, and loan EMI collections from a unified dashboard.',
+    category: 'BBPS Services',
+    tags: ['Recharges', 'Utility Bills', 'Insurance', 'EMI Collect'],
+    image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80',
+    demoUrl: '#'
   }
 ];
 
@@ -44,6 +52,12 @@ const Products = () => {
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
+    document.title = "Our Products | Infycore Payments Gateway & BBPS";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Explore Infycore's fintech products: Payment Gateway API, UPI Dynamic QR, Automated Payouts, Billing Links, and Bharat Bill Pay (BBPS) solutions.");
+    }
+
     const fetchProducts = async () => {
       try {
         const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
@@ -86,71 +100,76 @@ const Products = () => {
     }
   };
 
-  const categories = ['All', 'Payment Gateway', 'UPI & QR', 'Payout Links', 'Payin Links'];
+  const categories = ['All', 'Payment Gateway', 'UPI & QR', 'Payout Links', 'Payin Links', 'BBPS Services'];
 
   return (
-    <section className="section-padding container">
-      <div className="section-header">
-        <h2 className="section-title italic-black">
-          Smart <span className="highlight">Payment</span> Products & Services
-        </h2>
-        <p className="section-subtitle">
-          Explore our suite of transaction management solutions built to automate, secure, and accelerate commerce.
-          {isLive ? (
-            <span style={{ display: 'block', color: '#10b981', fontSize: '12px', marginTop: '8px', fontWeight: 'bold' }}>
-              <i className="fas fa-circle-check"></i> Infycore Payments Network Active (Live Connection)
-            </span>
-          ) : (
-            <span style={{ display: 'block', color: '#f37921', fontSize: '12px', marginTop: '8px', fontWeight: 'bold' }}>
-              <i className="fas fa-circle-info"></i> Backup Payments Network Active (Offline Mode)
-            </span>
-          )}
-        </p>
-      </div>
-
-      {/* Filter Buttons */}
-      <div className="filter-container">
-        {categories.map((cat, idx) => (
-          <button
-            key={idx}
-            className={`filter-btn ${activeFilter === cat ? 'active' : ''}`}
-            onClick={() => handleFilterClick(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px 0' }}>
-          <i className="fas fa-spinner fa-spin" style={{ fontSize: '30px', color: 'var(--color-orange)' }}></i>
-          <p style={{ marginTop: '12px', color: 'var(--color-text-gray)' }}>Loading products list...</p>
+    <div className="products-page-wrapper">
+      <section className="section-padding container">
+        <div className="section-header animate-fade-in-up">
+          <h2 className="section-title italic-black">
+            Smart <span className="highlight">Payment</span> Products & Services
+          </h2>
+          <p className="section-subtitle">
+            <span style={{fontFamily: 'var(--font-secondary)'}}>Explore our suite of transaction management solutions built to automate, secure, and accelerate commerce.</span>
+            {isLive ? (
+              <span style={{ display: 'block', color: '#10b981', fontSize: '12px', marginTop: '8px', fontWeight: 'bold' }}>
+                <i className="fas fa-circle-check"></i> Infycore Payments Network Active (Live Connection)
+              </span>
+            ) : (
+              <span style={{ display: 'block', color: '#f37921', fontSize: '12px', marginTop: '8px', fontWeight: 'bold' }}>
+                <i className="fas fa-circle-info"></i> Backup Payments Network Active (Offline Mode)
+              </span>
+            )}
+          </p>
         </div>
-      ) : (
-        <div className="projects-grid">
-          {filteredProducts.map((product, idx) => (
-            <div className="project-card" key={product._id || idx}>
-              <div className="project-image-box">
-                <img src={product.image} alt={product.title} className="project-img" />
-                <span className="project-badge">{product.category}</span>
-              </div>
-              <div className="project-body">
-                <h3 className="italic-black project-title">{product.title}</h3>
-                <p className="project-desc">{product.description}</p>
-                <div className="project-tags">
-                  {product.tags.map((tag, tagIdx) => (
-                    <span className="project-tag" key={tagIdx}>{tag}</span>
-                  ))}
-                </div>
-                <a href={product.demoUrl} className="project-link">
-                  Learn More <i className="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
+
+        {/* Filter Buttons */}
+        <div className="filter-container animate-scale-in delay-100">
+          {categories.map((cat, idx) => (
+            <button
+              key={idx}
+              className={`filter-btn ${activeFilter === cat ? 'active' : ''}`}
+              onClick={() => handleFilterClick(cat)}
+            >
+              {cat}
+            </button>
           ))}
         </div>
-      )}
-    </section>
+
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '40px 0' }}>
+            <i className="fas fa-spinner fa-spin" style={{ fontSize: '30px', color: 'var(--color-orange)' }}></i>
+            <p style={{ marginTop: '12px', color: 'var(--color-text-gray)' }}>Loading products list...</p>
+          </div>
+        ) : (
+          <div className="projects-grid">
+            {filteredProducts.map((product, idx) => {
+              const delayClass = `delay-${Math.min((idx + 1) * 100, 500)}`;
+              return (
+                <div className={`project-card animate-fade-in-up hover-lift ${delayClass}`} key={product._id || idx}>
+                  <div className="project-image-box">
+                    <img src={product.image} alt={product.title} className="project-img" />
+                    <span className="project-badge">{product.category}</span>
+                  </div>
+                  <div className="project-body">
+                    <h3 className="italic-black project-title">{product.title}</h3>
+                    <p className="project-desc">{product.description}</p>
+                    <div className="project-tags">
+                      {product.tags.map((tag, tagIdx) => (
+                        <span className="project-tag" key={tagIdx}>{tag}</span>
+                      ))}
+                    </div>
+                    <a href={product.demoUrl} className="project-link">
+                      Learn More <i className="fas fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
+    </div>
   );
 };
 

@@ -69,6 +69,9 @@ const Navbar = () => {
             <NavLink to="/products" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
               Products
             </NavLink>
+            <NavLink to="/faq" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
+              FAQ
+            </NavLink>
             <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
               Contact
             </NavLink>
@@ -85,8 +88,8 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <NavLink to="/login" className="btn btn-secondary" style={{ padding: '8px 16px' }}>
-                  Sign In
+                <NavLink to="/login" className="btn btn-secondary" style={{ padding: '8px 16px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <i className="fas fa-user"></i> Sign In
                 </NavLink>
                 <NavLink to="/contact" className="btn btn-primary">
                   <i className="fas fa-rocket mr-1"></i> Apply Now
@@ -114,6 +117,11 @@ const Navbar = () => {
           <NavLink to="/products" className={({ isActive }) => isActive ? "mobile-nav-item active" : "mobile-nav-item"} onClick={closeMobileMenu}>
             Products
           </NavLink>
+
+          <NavLink to="/faq" className={({ isActive }) => isActive ? "mobile-nav-item active" : "mobile-nav-item"} onClick={closeMobileMenu}>
+            FAQ
+          </NavLink>
+
           <NavLink to="/contact" className={({ isActive }) => isActive ? "mobile-nav-item active" : "mobile-nav-item"} onClick={closeMobileMenu}>
             Contact
           </NavLink>
@@ -126,8 +134,8 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <NavLink to="/login" className="btn btn-secondary" style={{ marginTop: '20px' }} onClick={closeMobileMenu}>
-                Sign In
+              <NavLink to="/login" className="btn btn-secondary" style={{ marginTop: '20px', display: 'inline-flex', alignItems: 'center', gap: '8px' }} onClick={closeMobileMenu}>
+                <i className="fas fa-user"></i> Sign In
               </NavLink>
               <NavLink to="/contact" className="btn btn-primary" style={{ marginTop: '10px' }} onClick={closeMobileMenu}>
                 <i className="fas fa-rocket mr-1"></i> Apply Now

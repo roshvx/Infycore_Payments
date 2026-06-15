@@ -40,6 +40,14 @@ const sampleProjects = [
     tags: ['SMS Pay', 'Web Checkout', 'Billing Links'],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
     demoUrl: '#'
+  },
+  {
+    title: 'BBPS Services (Bharat Bill Pay)',
+    description: 'Provide secure utility bill payments, mobile and DTH recharges, insurance premium collections, and loan EMI collections from a unified dashboard.',
+    category: 'BBPS Services',
+    tags: ['Recharges', 'Utility Bills', 'Insurance', 'EMI Collect'],
+    image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80',
+    demoUrl: '#'
   }
 ];
 
