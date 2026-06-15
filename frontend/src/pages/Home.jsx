@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import dashboardMockup from '../assets/dashboard_mockup.png';
 
 const Home = () => {
   return (
@@ -26,7 +27,7 @@ const Home = () => {
           </div>
           <div className="hero-image-wrapper">
             <img 
-              src="https://images.unsplash.com/photo-1563013544-824ae1d704d3?auto=format&fit=crop&w=800&q=80" 
+              src={dashboardMockup} 
               alt="Secured Payment Gateway Interface" 
               className="hero-img" 
             />
