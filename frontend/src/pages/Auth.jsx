@@ -90,26 +90,32 @@ const Auth = () => {
           navigate('/');
         }, 1500);
       } else {
-        throw new Error(data.message || 'Request failed.');
+        setStatus('error');
+        setStatusMessage(data.message || 'Authentication failed. Please check your credentials.');
       }
     } catch (err) {
       console.error('Authentication error:', err);
 
-      // Fallback local simulation for demo purposes
-      setStatus('success');
-      setStatusMessage(`${isLogin ? 'Login' : 'Signup'} successful! (Offline Demo Simulation)`);
+      // Only fall back to local simulation on localhost for development ease
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        setStatus('success');
+        setStatusMessage(`${isLogin ? 'Login' : 'Signup'} successful! (Offline Demo Simulation)`);
 
-      const simulatedUser = {
-        name: name || 'Demo User',
-        email: email
-      };
+        const simulatedUser = {
+          name: name || 'Demo User',
+          email: email
+        };
 
-      localStorage.setItem('user', JSON.stringify(simulatedUser));
-      window.dispatchEvent(new Event('authChange'));
+        localStorage.setItem('user', JSON.stringify(simulatedUser));
+        window.dispatchEvent(new Event('authChange'));
 
-      setTimeout(() => {
-        navigate('/');
-      }, 1500);
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
+      } else {
+        setStatus('error');
+        setStatusMessage('Network error. Unable to connect to the authentication server.');
+      }
     }
   };
 
