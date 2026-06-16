@@ -55,10 +55,12 @@ const Navbar = () => {
 
       <header className="navbar-wrapper">
         <div className="container navbar-container">
-          {/* Logo */}
           <NavLink to="/" className="logo-link" onClick={closeMobileMenu}>
             <i className="fas fa-shield-halved logo-icon"></i>
-            <span className="italic-black logo-text">Infycore Payments</span>
+            <span className="italic-black logo-text">
+              <span className="logo-text-brand">Infycore</span>
+              <span className="logo-text-sub"> Payments</span>
+            </span>
           </NavLink>
 
           {/* Desktop Nav Links */}
@@ -78,7 +80,7 @@ const Navbar = () => {
           </nav>
 
           {/* Nav CTA */}
-          <div className="nav-cta" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <div className="nav-cta">
             {user ? (
               <>
                 <span className="nav-item" style={{ textTransform: 'none', cursor: 'default' }}>Hi, {user.name}</span>

@@ -237,6 +237,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-cta {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .hamburger {
@@ -960,7 +961,7 @@ textarea.form-control {
 /* Responsiveness overrides */
 @media (max-width: 991px) {
   .nav-links, .nav-cta {
-    display: none;
+    display: none !important;
   }
   
   .hamburger {
@@ -969,6 +970,19 @@ textarea.form-control {
   
   .mobile-nav-panel {
     display: flex;
+  }
+}
+
+/* Responsiveness overrides for branding logo text */
+@media (max-width: 768px) {
+  .logo-text-sub {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text-brand {
+    display: none;
   }
 }
 
