@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getApiUrl } from '../services/api';
 
 // Fallback products representing actual financial services offered
 const FALLBACK_PRODUCTS = [
@@ -60,9 +61,7 @@ const Products = () => {
 
     const fetchProducts = async () => {
       try {
-        const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-          ? 'http://localhost:5000/api/projects'
-          : '/api/projects';
+        const apiBase = getApiUrl('/api/projects');
 
         const response = await fetch(apiBase);
         if (response.ok) {

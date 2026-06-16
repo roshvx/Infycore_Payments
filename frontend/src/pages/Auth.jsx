@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../services/api';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -63,9 +64,7 @@ const Auth = () => {
 
     try {
       const apiEndpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-      const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? `http://localhost:5000${apiEndpoint}`
-        : apiEndpoint;
+      const apiBase = getApiUrl(apiEndpoint);
 
       const response = await fetch(apiBase, {
         method: 'POST',

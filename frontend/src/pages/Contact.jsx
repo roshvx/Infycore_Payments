@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getApiUrl } from '../services/api';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -39,9 +40,7 @@ const Contact = () => {
     setStatusMessage('');
 
     try {
-      const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:5000/api/contact'
-        : '/api/contact';
+      const apiBase = getApiUrl('/api/contact');
 
       const response = await fetch(apiBase, {
         method: 'POST',
