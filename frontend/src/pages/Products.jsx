@@ -110,15 +110,6 @@ const Products = () => {
           </h2>
           <p className="section-subtitle subtitle-highlight">
             Explore our suite of transaction management solutions built to automate, secure, and accelerate commerce.
-            {isLive ? (
-              <span style={{ display: 'block', color: '#10b981', fontSize: '12px', marginTop: '8px', fontWeight: 'bold' }}>
-                <i className="fas fa-circle-check"></i> Infycore Payments Network Active (Live Connection)
-              </span>
-            ) : (
-              <span style={{ display: 'block', color: '#f37921', fontSize: '12px', marginTop: '8px', fontWeight: 'bold' }}>
-                <i className="fas fa-circle-info"></i> Backup Payments Network Active (Offline Mode)
-              </span>
-            )}
           </p>
         </div>
 

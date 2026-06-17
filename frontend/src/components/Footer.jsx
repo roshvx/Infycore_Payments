@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logoImg from '../assets/logo.png';
 
 const Footer = () => {
   return (
@@ -7,10 +8,14 @@ const Footer = () => {
       <div className="container footer-grid">
         {/* Brand Column */}
         <div className="footer-brand">
-          <h3>
-            <i className="fas fa-shield-halved text-orange"></i>
-            <span className="italic-black">Infycore Payments</span>
-          </h3>
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} className="logo-link" style={{ marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+            <div className="logo-crop-container logo-icon">
+              <img src={logoImg} alt="Infycore Payments Logo" className="logo-crop-img" />
+            </div>
+            <span className="italic-black" style={{ fontSize: '24px', color: 'var(--color-text-light)' }}>
+              Infycore Payments
+            </span>
+          </Link>
           <p>
             Building secure payment orchestrations, high-performance checkout APIs, and reliable settlement structures tailored for modern digital business ecosystems.
           </p>

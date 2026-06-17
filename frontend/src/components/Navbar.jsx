@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import logoImg from '../assets/logo.png';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -56,7 +57,9 @@ const Navbar = () => {
       <header className="navbar-wrapper">
         <div className="container navbar-container">
           <NavLink to="/" className="logo-link" onClick={closeMobileMenu}>
-            <i className="fas fa-shield-halved logo-icon"></i>
+            <div className="logo-crop-container logo-icon">
+              <img src={logoImg} alt="Infycore Payments Logo" className="logo-crop-img" />
+            </div>
             <span className="italic-black logo-text">
               <span className="logo-text-brand">Infycore</span>
               <span className="logo-text-sub"> Payments</span>
